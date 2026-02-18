@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -7,13 +6,13 @@ const Hero = () => {
       {/* Subtle gradient orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-electric/5 blur-[120px] pointer-events-none" />
       
-      <div className="container relative z-10 text-center px-4">
+      <div className="container relative z-10 text-center px-6 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <h1 className="text-6xl sm:text-8xl md:text-[10rem] lg:text-[13rem] font-black tracking-tighter leading-[0.85] mb-8">
+          <h1 className="font-black tracking-tighter leading-[0.85] mb-8" style={{ fontSize: 'clamp(3rem, 15vw, 12rem)' }}>
             NEOSTORM<span className="text-gradient-electric glow-text-electric">.AI</span>
           </h1>
         </motion.div>
@@ -38,12 +37,10 @@ const Hero = () => {
               e.preventDefault();
               const lb = document.getElementById("portfolio");
               lb?.scrollIntoView({ behavior: "smooth" });
-              window.dispatchEvent(new CustomEvent("open-showreel"));
             }}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 group glow-electric"
           >
-            <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span className="text-sm font-medium tracking-widest uppercase">Watch Reel</span>
+            <span className="text-sm font-medium tracking-widest uppercase">Explore Portfolio</span>
           </a>
         </motion.div>
       </div>
