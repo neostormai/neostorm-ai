@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { categories, portfolioItems, type VideoCategory, type VideoItem } from "@/data/portfolio";
 import { X } from "lucide-react";
@@ -10,8 +10,6 @@ const VideoCard = ({ item, onClick }: { item: VideoItem; onClick: () => void }) 
   const aspectMap: Record<string, string> = {
     "16/9": "aspect-video",
     "9/16": "aspect-[9/16]",
-    "1/1": "aspect-square",
-    "4/5": "aspect-[4/5]",
   };
 
   return (
@@ -76,7 +74,7 @@ const Lightbox = ({ item, onClose }: { item: VideoItem; onClose: () => void }) =
         onClick={(e) => e.stopPropagation()}
       >
         <iframe
-          src={`${item.videoUrl}?autoplay=1`}
+          src={`${item.videoUrl}?rel=0&modestbranding=1&autoplay=1`}
           className="w-full h-full rounded-lg"
           allow="autoplay; fullscreen"
           allowFullScreen
@@ -103,6 +101,16 @@ const Portfolio = () => {
     setLightboxItem(null);
     document.body.style.overflow = "";
   }, []);
+
+  // Listen for showreel open event from Hero
+  useEffect(() => {
+    const handler = () => {
+      const showreel = portfolioItems.find((i) => i.id === "hero");
+      if (showreel) handleOpen(showreel);
+    };
+    window.addEventListener("open-showreel", handler);
+    return () => window.removeEventListener("open-showreel", handler);
+  }, [handleOpen]);
 
   return (
     <section id="portfolio" className="py-24 md:py-32">
