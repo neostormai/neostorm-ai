@@ -13,8 +13,8 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] mb-6">
-            NEOSTORM<span className="text-gradient-electric">.AI</span>
+          <h1 className="text-6xl sm:text-8xl md:text-[10rem] lg:text-[13rem] font-black tracking-tighter leading-[0.85] mb-8">
+            NEOSTORM<span className="text-gradient-electric glow-text-electric">.AI</span>
           </h1>
         </motion.div>
 
