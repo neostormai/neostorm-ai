@@ -12,7 +12,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <h1 className="font-black tracking-tighter leading-[0.85] mb-8" style={{ fontSize: 'clamp(3rem, 15vw, 12rem)' }}>
+          <h1 className="font-black tracking-tighter leading-[0.85] mb-8" style={{ fontSize: 'clamp(2rem, 8vw, 6rem)' }}>
             NEOSTORM<span className="text-gradient-electric glow-text-electric">.AI</span>
           </h1>
         </motion.div>
@@ -40,7 +40,7 @@ const Hero = () => {
             }}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 group glow-electric"
           >
-            <span className="text-sm font-medium tracking-widest uppercase">Explore Portfolio</span>
+            <span className="text-sm font-medium tracking-widest uppercase">Смотреть</span>
           </a>
         </motion.div>
       </div>
