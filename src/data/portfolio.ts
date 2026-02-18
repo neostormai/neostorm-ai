@@ -1,56 +1,78 @@
-export type VideoCategory = "all" | "image" | "snippets" | "ads" | "films";
+export type VideoCategory = "all" | "fashion" | "advertising";
 
 export interface VideoItem {
   id: string;
   title: string;
-  category: VideoCategory;
+  category: Exclude<VideoCategory, "all">;
   thumbnail: string;
   videoUrl: string;
-  aspectRatio: "16/9" | "9/16" | "1/1" | "4/5";
-  span?: "col-span-1" | "col-span-2" | "row-span-2";
+  aspectRatio: "16/9" | "9/16";
+  span?: "col-span-1" | "col-span-2";
 }
 
-const thumbnailBase = "https://images.unsplash.com/";
+const ytThumb = (id: string) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+const ytEmbed = (id: string) => `https://www.youtube.com/embed/${id}`;
 
 export const categories: { key: VideoCategory; label: string }[] = [
   { key: "all", label: "All" },
-  { key: "image", label: "Имиджевое видео" },
-  { key: "snippets", label: "Сниппеты" },
-  { key: "ads", label: "Реклама" },
-  { key: "films", label: "Фильмы" },
+  { key: "fashion", label: "Fashion" },
+  { key: "advertising", label: "Advertising" },
 ];
 
-export const portfolioItems: VideoItem[] = [
-  { id: "1", title: "Brand Reveal", category: "image", thumbnail: `${thumbnailBase}photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9", span: "col-span-2" },
-  { id: "2", title: "Neural Flow", category: "snippets", thumbnail: `${thumbnailBase}photo-1550745165-9bc0b252726f?w=400&h=600&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "9/16" },
-  { id: "3", title: "Product Launch", category: "ads", thumbnail: `${thumbnailBase}photo-1535016120720-40c646be5580?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "4", title: "Cyber Dreams", category: "films", thumbnail: `${thumbnailBase}photo-1518770660439-4636190af475?w=400&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "1/1" },
-  { id: "5", title: "AI Genesis", category: "image", thumbnail: `${thumbnailBase}photo-1485846234645-a62644f84728?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "6", title: "Data Pulse", category: "snippets", thumbnail: `${thumbnailBase}photo-1504384308090-c894fdcc538d?w=400&h=600&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "9/16" },
-  { id: "7", title: "Metro Ad", category: "ads", thumbnail: `${thumbnailBase}photo-1536440136628-849c177e76a1?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9", span: "col-span-2" },
-  { id: "8", title: "Neon Streets", category: "films", thumbnail: `${thumbnailBase}photo-1492691527719-9d1e07e534b4?w=400&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "1/1" },
-  { id: "9", title: "Signal Boost", category: "image", thumbnail: `${thumbnailBase}photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "10", title: "Loop Reel", category: "snippets", thumbnail: `${thumbnailBase}photo-1561883088-039e53143d73?w=400&h=600&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "9/16" },
-  { id: "11", title: "Quick Spot", category: "ads", thumbnail: `${thumbnailBase}photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "12", title: "Electric Night", category: "films", thumbnail: `${thumbnailBase}photo-1478720568477-152d9b164e26?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9", span: "col-span-2" },
-  { id: "13", title: "Brand Story", category: "image", thumbnail: `${thumbnailBase}photo-1574717024653-61fd2cf4d44d?w=400&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "1/1" },
-  { id: "14", title: "Clip Wave", category: "snippets", thumbnail: `${thumbnailBase}photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "15", title: "Social Spot", category: "ads", thumbnail: `${thumbnailBase}photo-1460925895917-afdab827c52f?w=400&h=600&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "9/16" },
-  { id: "16", title: "Documentary AI", category: "films", thumbnail: `${thumbnailBase}photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "17", title: "Vision Cast", category: "image", thumbnail: `${thumbnailBase}photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "18", title: "Byte Reel", category: "snippets", thumbnail: `${thumbnailBase}photo-1526628953301-3e589a6a8b74?w=400&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "1/1" },
-  { id: "19", title: "Promo X", category: "ads", thumbnail: `${thumbnailBase}photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9", span: "col-span-2" },
-  { id: "20", title: "Parallel", category: "films", thumbnail: `${thumbnailBase}photo-1485846234645-a62644f84728?w=400&h=600&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "9/16" },
-  { id: "21", title: "Pulse Brand", category: "image", thumbnail: `${thumbnailBase}photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "22", title: "Micro Cut", category: "snippets", thumbnail: `${thumbnailBase}photo-1563206767-5b18f218e8de?w=400&h=600&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "9/16" },
-  { id: "23", title: "Ad Blast", category: "ads", thumbnail: `${thumbnailBase}photo-1553877522-43269d4ea984?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "24", title: "Synthetic", category: "films", thumbnail: `${thumbnailBase}photo-1516035069371-29a1b244cc32?w=400&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "1/1" },
-  { id: "25", title: "Core Image", category: "image", thumbnail: `${thumbnailBase}photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "26", title: "Flash Clip", category: "snippets", thumbnail: `${thumbnailBase}photo-1542744173-8e7e53415bb0?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "27", title: "TV Spot", category: "ads", thumbnail: `${thumbnailBase}photo-1516321497487-e288fb19713f?w=400&h=600&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "9/16" },
-  { id: "28", title: "Epoch", category: "films", thumbnail: `${thumbnailBase}photo-1440404653325-ab127d49abc1?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9", span: "col-span-2" },
-  { id: "29", title: "Identity", category: "image", thumbnail: `${thumbnailBase}photo-1559028012-481c04fa702d?w=400&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "1/1" },
-  { id: "30", title: "Clip Storm", category: "snippets", thumbnail: `${thumbnailBase}photo-1550439062-609e1531270e?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "31", title: "Viral X", category: "ads", thumbnail: `${thumbnailBase}photo-1526628953301-3e589a6a8b74?w=600&h=400&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "16/9" },
-  { id: "32", title: "Horizon", category: "films", thumbnail: `${thumbnailBase}photo-1524712245354-2c4e5e7121c0?w=400&h=600&fit=crop`, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", aspectRatio: "9/16" },
+// Hero / Showreel video ID
+export const showreelVideoId = "_i6qN-Gjgws";
+
+// Ordered items — first two are pinned at top in "all" view
+const orderedItems: VideoItem[] = [
+  // 1. Showreel (pinned #1)
+  { id: "hero", title: "Showreel", category: "fashion", thumbnail: ytThumb("_i6qN-Gjgws"), videoUrl: ytEmbed("_i6qN-Gjgws"), aspectRatio: "16/9", span: "col-span-2" },
+  // 2. Advertising Highlight (pinned #2)
+  { id: "ad-highlight", title: "Ad Highlight", category: "advertising", thumbnail: ytThumb("2PD6Civkw74"), videoUrl: ytEmbed("2PD6Civkw74"), aspectRatio: "16/9", span: "col-span-2" },
+
+  // Fashion
+  { id: "f1", title: "Fashion Film", category: "fashion", thumbnail: ytThumb("T-dU5URMAaI"), videoUrl: ytEmbed("T-dU5URMAaI"), aspectRatio: "9/16" },
+  { id: "f2", title: "Runway Edit", category: "fashion", thumbnail: ytThumb("zZo169XRVhI"), videoUrl: ytEmbed("zZo169XRVhI"), aspectRatio: "9/16" },
+  { id: "f3", title: "Style Reel", category: "fashion", thumbnail: ytThumb("AHNuWiz2POg"), videoUrl: ytEmbed("AHNuWiz2POg"), aspectRatio: "9/16" },
+  { id: "f4", title: "Lookbook", category: "fashion", thumbnail: ytThumb("85VjXnLEO70"), videoUrl: ytEmbed("85VjXnLEO70"), aspectRatio: "9/16" },
+  { id: "f5", title: "Editorial", category: "fashion", thumbnail: ytThumb("Ad3aTp3ZamU"), videoUrl: ytEmbed("Ad3aTp3ZamU"), aspectRatio: "9/16" },
+  { id: "f6", title: "Campaign", category: "fashion", thumbnail: ytThumb("5UN_5D4kOos"), videoUrl: ytEmbed("5UN_5D4kOos"), aspectRatio: "9/16" },
+  { id: "f7", title: "Collection", category: "fashion", thumbnail: ytThumb("qk3x_iCZURk"), videoUrl: ytEmbed("qk3x_iCZURk"), aspectRatio: "9/16" },
+  { id: "f8", title: "Atelier", category: "fashion", thumbnail: ytThumb("Vp9jBp__bMs"), videoUrl: ytEmbed("Vp9jBp__bMs"), aspectRatio: "9/16" },
+  { id: "f9", title: "Couture", category: "fashion", thumbnail: ytThumb("-oX8OQpFt-Q"), videoUrl: ytEmbed("-oX8OQpFt-Q"), aspectRatio: "16/9", span: "col-span-2" },
+
+  // Advertising
+  { id: "a1", title: "Brand Spot", category: "advertising", thumbnail: ytThumb("vqgYgNKArTk"), videoUrl: ytEmbed("vqgYgNKArTk"), aspectRatio: "16/9", span: "col-span-2" },
+  { id: "a2", title: "Product Promo", category: "advertising", thumbnail: ytThumb("jcvqpP3KEeM"), videoUrl: ytEmbed("jcvqpP3KEeM"), aspectRatio: "9/16" },
+  { id: "a3", title: "Social Ad", category: "advertising", thumbnail: ytThumb("IrVSFw5BQkM"), videoUrl: ytEmbed("IrVSFw5BQkM"), aspectRatio: "9/16" },
+  { id: "a4", title: "Launch Clip", category: "advertising", thumbnail: ytThumb("pBChaCNJQe8"), videoUrl: ytEmbed("pBChaCNJQe8"), aspectRatio: "9/16" },
+  { id: "a5", title: "Viral Spot", category: "advertising", thumbnail: ytThumb("JhNgOnbR8Rs"), videoUrl: ytEmbed("JhNgOnbR8Rs"), aspectRatio: "9/16" },
+  { id: "a6", title: "Promo Reel", category: "advertising", thumbnail: ytThumb("AxpOKSoldeQ"), videoUrl: ytEmbed("AxpOKSoldeQ"), aspectRatio: "9/16" },
+  { id: "a7", title: "Ad Creative", category: "advertising", thumbnail: ytThumb("AXqFVAJuZKE"), videoUrl: ytEmbed("AXqFVAJuZKE"), aspectRatio: "9/16" },
+  { id: "a8", title: "Quick Spot", category: "advertising", thumbnail: ytThumb("McZ0YbI1uls"), videoUrl: ytEmbed("McZ0YbI1uls"), aspectRatio: "9/16" },
+  { id: "a9", title: "Flash Ad", category: "advertising", thumbnail: ytThumb("e6K4veNwKlo"), videoUrl: ytEmbed("e6K4veNwKlo"), aspectRatio: "9/16" },
+  { id: "a10", title: "Teaser", category: "advertising", thumbnail: ytThumb("yPuJXBwpM5I"), videoUrl: ytEmbed("yPuJXBwpM5I"), aspectRatio: "9/16" },
+  { id: "a11", title: "Hype Clip", category: "advertising", thumbnail: ytThumb("ErLsbxD--z8"), videoUrl: ytEmbed("ErLsbxD--z8"), aspectRatio: "9/16" },
+  { id: "a12", title: "Commercial", category: "advertising", thumbnail: ytThumb("tMUK0gLXaiQ"), videoUrl: ytEmbed("tMUK0gLXaiQ"), aspectRatio: "16/9" },
+  { id: "a13", title: "TV Spot", category: "advertising", thumbnail: ytThumb("TdLLEsEfS-s"), videoUrl: ytEmbed("TdLLEsEfS-s"), aspectRatio: "16/9" },
+  { id: "a14", title: "Digital Ad", category: "advertising", thumbnail: ytThumb("d9SqCJwiIr8"), videoUrl: ytEmbed("d9SqCJwiIr8"), aspectRatio: "16/9", span: "col-span-2" },
+  { id: "a15", title: "Brand Film", category: "advertising", thumbnail: ytThumb("MyJE5iNMZoI"), videoUrl: ytEmbed("MyJE5iNMZoI"), aspectRatio: "16/9" },
+  { id: "a16", title: "Showcase", category: "advertising", thumbnail: ytThumb("H-qiOGrbL10"), videoUrl: ytEmbed("H-qiOGrbL10"), aspectRatio: "16/9" },
+  { id: "a17", title: "Director's Cut", category: "advertising", thumbnail: ytThumb("_i6qN-Gjgws"), videoUrl: ytEmbed("_i6qN-Gjgws"), aspectRatio: "16/9" },
 ];
+
+// Seeded shuffle for the non-pinned items so "all" view mixes categories
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const a = [...arr];
+  let s = seed;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = (s * 16807) % 2147483647;
+    const j = s % (i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const pinned = orderedItems.slice(0, 2);
+const rest = seededShuffle(orderedItems.slice(2), 42);
+
+export const portfolioItems: VideoItem[] = [...pinned, ...rest];
