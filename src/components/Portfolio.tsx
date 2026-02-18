@@ -199,11 +199,11 @@ const Portfolio = () => {
     document.body.style.overflow = "";
   }, []);
 
-  // Listen for showreel open event from Hero
+  // Listen for featured video open event from Hero
   useEffect(() => {
     const handler = () => {
-      const showreel = portfolioItems.find((i) => i.id === "hero");
-      if (showreel) handleOpen(showreel);
+      const featured = portfolioItems.find((i) => i.id === "ad-highlight");
+      if (featured) handleOpen(featured);
     };
     window.addEventListener("open-showreel", handler);
     return () => window.removeEventListener("open-showreel", handler);

@@ -19,14 +19,12 @@ export const categories: { key: VideoCategory; label: string }[] = [
   { key: "advertising", label: "Advertising" },
 ];
 
-// Hero / Showreel video ID
-export const showreelVideoId = "_i6qN-Gjgws";
+// Featured video ID (Ad Highlight)
+export const featuredVideoId = "2PD6Civkw74";
 
-// Ordered items — first two are pinned at top in "all" view
+// Ordered items — first one is pinned at top in "all" view
 const orderedItems: VideoItem[] = [
-  // 1. Showreel (pinned #1)
-  { id: "hero", title: "Showreel", category: "fashion", thumbnail: ytThumb("_i6qN-Gjgws"), videoUrl: ytEmbed("_i6qN-Gjgws"), aspectRatio: "16/9", span: "col-span-2" },
-  // 2. Advertising Highlight (pinned #2)
+  // 1. Advertising Highlight (pinned #1)
   { id: "ad-highlight", title: "Ad Highlight", category: "advertising", thumbnail: ytThumb("2PD6Civkw74"), videoUrl: ytEmbed("2PD6Civkw74"), aspectRatio: "16/9", span: "col-span-2" },
 
   // Fashion
@@ -57,7 +55,7 @@ const orderedItems: VideoItem[] = [
   { id: "a14", title: "Digital Ad", category: "advertising", thumbnail: ytThumb("d9SqCJwiIr8"), videoUrl: ytEmbed("d9SqCJwiIr8"), aspectRatio: "16/9", span: "col-span-2" },
   { id: "a15", title: "Brand Film", category: "advertising", thumbnail: ytThumb("MyJE5iNMZoI"), videoUrl: ytEmbed("MyJE5iNMZoI"), aspectRatio: "16/9" },
   { id: "a16", title: "Showcase", category: "advertising", thumbnail: ytThumb("H-qiOGrbL10"), videoUrl: ytEmbed("H-qiOGrbL10"), aspectRatio: "16/9" },
-  { id: "a17", title: "Director's Cut", category: "advertising", thumbnail: ytThumb("_i6qN-Gjgws"), videoUrl: ytEmbed("_i6qN-Gjgws"), aspectRatio: "16/9" },
+  
 ];
 
 // Seeded shuffle for the non-pinned items so "all" view mixes categories
@@ -72,7 +70,7 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
   return a;
 }
 
-const pinned = orderedItems.slice(0, 2);
-const rest = seededShuffle(orderedItems.slice(2), 42);
+const pinned = orderedItems.slice(0, 1);
+const rest = seededShuffle(orderedItems.slice(1), 42);
 
 export const portfolioItems: VideoItem[] = [...pinned, ...rest];

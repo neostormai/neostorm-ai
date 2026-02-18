@@ -38,13 +38,12 @@ const Hero = () => {
               e.preventDefault();
               const lb = document.getElementById("portfolio");
               lb?.scrollIntoView({ behavior: "smooth" });
-              // Dispatch a custom event to open the showreel lightbox
               window.dispatchEvent(new CustomEvent("open-showreel"));
             }}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 group glow-electric"
           >
             <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span className="text-sm font-medium tracking-widest uppercase">Showreel</span>
+            <span className="text-sm font-medium tracking-widest uppercase">Watch Reel</span>
           </a>
         </motion.div>
       </div>
