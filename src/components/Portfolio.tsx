@@ -1,7 +1,7 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { categories, portfolioItems, type VideoCategory, type VideoItem } from "@/data/portfolio";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const VideoCard = ({ item, onClick }: { item: VideoItem; onClick: () => void }) => {
   const [loaded, setLoaded] = useState(false);
@@ -50,36 +50,133 @@ const VideoCard = ({ item, onClick }: { item: VideoItem; onClick: () => void }) 
   );
 };
 
-const Lightbox = ({ item, onClose }: { item: VideoItem; onClose: () => void }) => {
+const Lightbox = ({
+  item,
+  items,
+  onClose,
+  onNavigate,
+}: {
+  item: VideoItem;
+  items: VideoItem[];
+  onClose: () => void;
+  onNavigate: (item: VideoItem) => void;
+}) => {
+  const currentIndex = items.findIndex((i) => i.id === item.id);
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex < items.length - 1;
+
+  const goPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (hasPrev) onNavigate(items[currentIndex - 1]);
+  };
+  const goNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (hasNext) onNavigate(items[currentIndex + 1]);
+  };
+
+  // Keyboard navigation
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" && hasPrev) onNavigate(items[currentIndex - 1]);
+      if (e.key === "ArrowRight" && hasNext) onNavigate(items[currentIndex + 1]);
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [currentIndex, hasPrev, hasNext, items, onNavigate, onClose]);
+
+  // Visible thumbnails: up to 7, centered on current
+  const thumbCount = 7;
+  const half = Math.floor(thumbCount / 2);
+  let start = Math.max(0, currentIndex - half);
+  let end = start + thumbCount;
+  if (end > items.length) {
+    end = items.length;
+    start = Math.max(0, end - thumbCount);
+  }
+  const visibleThumbs = items.slice(start, end);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-xl flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center p-4"
       onClick={onClose}
     >
+      {/* Close */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors z-10"
+        className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors z-10"
       >
         <X className="w-5 h-5" />
       </button>
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        className="w-full max-w-4xl aspect-video"
+
+      {/* Main player area with nav */}
+      <div className="relative w-full max-w-4xl flex items-center" onClick={(e) => e.stopPropagation()}>
+        {/* Prev */}
+        <button
+          onClick={goPrev}
+          disabled={!hasPrev}
+          className="absolute -left-2 md:-left-14 z-10 w-10 h-10 rounded-full border border-border bg-card/80 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors disabled:opacity-20 disabled:cursor-default"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+
+        {/* Video */}
+        <motion.div
+          key={item.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.25 }}
+          className="w-full aspect-video"
+        >
+          <iframe
+            src={`${item.videoUrl}?rel=0&modestbranding=1&autoplay=1`}
+            className="w-full h-full rounded-lg"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          />
+        </motion.div>
+
+        {/* Next */}
+        <button
+          onClick={goNext}
+          disabled={!hasNext}
+          className="absolute -right-2 md:-right-14 z-10 w-10 h-10 rounded-full border border-border bg-card/80 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors disabled:opacity-20 disabled:cursor-default"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Title */}
+      <p className="mt-3 text-sm text-muted-foreground tracking-wide uppercase" onClick={(e) => e.stopPropagation()}>
+        {item.title} — {currentIndex + 1}/{items.length}
+      </p>
+
+      {/* Thumbnail strip */}
+      <div
+        className="mt-4 flex gap-2 overflow-x-auto max-w-4xl px-2 py-1 scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
-        <iframe
-          src={`${item.videoUrl}?rel=0&modestbranding=1&autoplay=1`}
-          className="w-full h-full rounded-lg"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-        />
-      </motion.div>
+        {visibleThumbs.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => onNavigate(t)}
+            className={`shrink-0 rounded overflow-hidden border-2 transition-all duration-200 ${
+              t.id === item.id
+                ? "border-primary ring-1 ring-primary/40 scale-105"
+                : "border-transparent opacity-50 hover:opacity-100"
+            }`}
+          >
+            <img
+              src={t.thumbnail}
+              alt={t.title}
+              className="w-20 h-12 object-cover"
+            />
+          </button>
+        ))}
+      </div>
     </motion.div>
   );
 };
@@ -156,7 +253,7 @@ const Portfolio = () => {
 
       {/* Lightbox */}
       <AnimatePresence>
-        {lightboxItem && <Lightbox item={lightboxItem} onClose={handleClose} />}
+        {lightboxItem && <Lightbox item={lightboxItem} items={filtered} onClose={handleClose} onNavigate={handleOpen} />}
       </AnimatePresence>
     </section>
   );
