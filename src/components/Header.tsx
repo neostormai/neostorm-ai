@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/logo.png";
 
 const navItems = [
   { label: "Portfolio", href: "#portfolio" },
@@ -23,8 +24,8 @@ const Header = () => {
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="text-lg font-bold tracking-tight text-foreground">
-          NEOSTORM<span className="text-gradient-electric">.AI</span>
+        <a href="#" className="flex items-center">
+          <img src={logo} alt="NEOSTORM.AI" className="h-8 md:h-10 w-auto" />
         </a>
 
         {/* Desktop nav */}
