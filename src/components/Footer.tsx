@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -41,6 +42,7 @@ const Footer = () => {
         </motion.div>
 
         <div className="mt-24 pt-8 border-t border-border">
+          <img src={logo} alt="NEOSTORM.AI" className="h-6 mx-auto mb-3 w-auto opacity-60" />
           <p className="text-xs text-muted-foreground tracking-widest uppercase">
             © 2025 NEOSTORM.AI
           </p>
