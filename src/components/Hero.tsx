@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[85vh] flex tems-center justify-center overflow-hidden bg-noise">
+    <section className="relative min-h-[85vh] flex tems-center justify-center overflow-hidden bg-noise pt-16 md:pt-20">
       {/* Subtle gradient orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-electric/5 blur-[120px] pointer-events-none" />
       
