@@ -14,9 +14,9 @@ const ytThumb = (id: string) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`
 const ytEmbed = (id: string) => `https://www.youtube-nocookie.com/embed/${id}`;
 
 export const categories: { key: VideoCategory; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "fashion", label: "Fashion" },
-  { key: "advertising", label: "Advertising" },
+  { key: "all", label: "Все" },
+  { key: "fashion", label: "Мода" },
+  { key: "advertising", label: "Реклама" },
 ];
 
 // Featured video ID (Ad Highlight)
