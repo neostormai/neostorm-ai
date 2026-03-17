@@ -11,7 +11,7 @@ export interface VideoItem {
 }
 
 const ytThumb = (id: string) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-const ytEmbed = (id: string) => `https://www.youtube.com/embed/${id}`;
+const ytEmbed = (id: string) => `https://www.youtube-nocookie.com/embed/${id}`;
 
 export const categories: { key: VideoCategory; label: string }[] = [
   { key: "all", label: "All" },
@@ -22,11 +22,19 @@ export const categories: { key: VideoCategory; label: string }[] = [
 // Featured video ID (Ad Highlight)
 export const featuredVideoId = "2PD6Civkw74";
 
-// Ordered items — first one is pinned at top in "all" view
+// Ordered items — first two are pinned at top in "all" view
 const orderedItems: VideoItem[] = [
-  // 1. Advertising Highlight (pinned #1)
+  // 0. NEW — Palace Identity Short (pinned #1)
+  {
+    id: "palace-short",
+    title: "Palace Identity",
+    category: "advertising",
+    thumbnail: ytThumb("lJruWPXGPC0"),
+    videoUrl: ytEmbed("lJruWPXGPC0"),
+    aspectRatio: "9/16",
+  },
+  // 1. Advertising Highlight (pinned #2)
   { id: "ad-highlight", title: "Ad Highlight", category: "advertising", thumbnail: ytThumb("2PD6Civkw74"), videoUrl: ytEmbed("2PD6Civkw74"), aspectRatio: "16/9", span: "col-span-2" },
-
   // Fashion
   { id: "f1", title: "Fashion Film", category: "fashion", thumbnail: ytThumb("T-dU5URMAaI"), videoUrl: ytEmbed("T-dU5URMAaI"), aspectRatio: "9/16" },
   { id: "f2", title: "Runway Edit", category: "fashion", thumbnail: ytThumb("zZo169XRVhI"), videoUrl: ytEmbed("zZo169XRVhI"), aspectRatio: "9/16" },
@@ -37,7 +45,6 @@ const orderedItems: VideoItem[] = [
   { id: "f7", title: "Collection", category: "fashion", thumbnail: ytThumb("qk3x_iCZURk"), videoUrl: ytEmbed("qk3x_iCZURk"), aspectRatio: "9/16" },
   { id: "f8", title: "Atelier", category: "fashion", thumbnail: ytThumb("Vp9jBp__bMs"), videoUrl: ytEmbed("Vp9jBp__bMs"), aspectRatio: "9/16" },
   { id: "f9", title: "Couture", category: "fashion", thumbnail: ytThumb("-oX8OQpFt-Q"), videoUrl: ytEmbed("-oX8OQpFt-Q"), aspectRatio: "16/9", span: "col-span-2" },
-
   // Advertising
   { id: "a1", title: "Brand Spot", category: "advertising", thumbnail: ytThumb("vqgYgNKArTk"), videoUrl: ytEmbed("vqgYgNKArTk"), aspectRatio: "16/9", span: "col-span-2" },
   { id: "a2", title: "Product Promo", category: "advertising", thumbnail: ytThumb("jcvqpP3KEeM"), videoUrl: ytEmbed("jcvqpP3KEeM"), aspectRatio: "9/16" },
@@ -55,7 +62,6 @@ const orderedItems: VideoItem[] = [
   { id: "a14", title: "Digital Ad", category: "advertising", thumbnail: ytThumb("d9SqCJwiIr8"), videoUrl: ytEmbed("d9SqCJwiIr8"), aspectRatio: "16/9", span: "col-span-2" },
   { id: "a15", title: "Brand Film", category: "advertising", thumbnail: ytThumb("MyJE5iNMZoI"), videoUrl: ytEmbed("MyJE5iNMZoI"), aspectRatio: "16/9" },
   { id: "a16", title: "Showcase", category: "advertising", thumbnail: ytThumb("H-qiOGrbL10"), videoUrl: ytEmbed("H-qiOGrbL10"), aspectRatio: "16/9" },
-  
 ];
 
 // Seeded shuffle for the non-pinned items so "all" view mixes categories
@@ -70,7 +76,6 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
   return a;
 }
 
-const pinned = orderedItems.slice(0, 1);
-const rest = seededShuffle(orderedItems.slice(1), 42);
-
+const pinned = orderedItems.slice(0, 2);
+const rest = seededShuffle(orderedItems.slice(2), 42);
 export const portfolioItems: VideoItem[] = [...pinned, ...rest];
