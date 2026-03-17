@@ -29,8 +29,8 @@ const orderedItems: VideoItem[] = [
     id: "palace-short",
     title: "Palace Identity",
     category: "advertising",
-    thumbnail: ytThumb("lJruWPXGPC0"),
-    videoUrl: ytEmbed("lJruWPXGPC0"),
+    thumbnail: ytThumb("-ghulvL-MSY"),
+    videoUrl: ytEmbed("-ghulvL-MSY"),
     aspectRatio: "9/16",
   },
   // 1. Advertising Highlight (pinned #2)
