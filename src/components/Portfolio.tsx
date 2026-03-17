@@ -220,8 +220,9 @@ const Portfolio = () => {
           className="mb-12"
         >
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-8">
-            Portfolio
-          </h2>
+
+            Портфолио
+           </h2>
 
           {/* Filter tabs */}
           <div className="flex flex-wrap gap-2">
