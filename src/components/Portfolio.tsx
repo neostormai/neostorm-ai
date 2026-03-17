@@ -210,7 +210,7 @@ const Portfolio = () => {
   }, [handleOpen]);
 
   return (
-    <section id="portfolio" className="py-24 md:py-32">
+    <section id="portfolio" className="pt-10 pb-24 md:pt-14 md:pb-32">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
